@@ -1,0 +1,40 @@
+## config.yaml
+training:
+  optimizer: "AdamW"
+  learning_rate: 1e-4  # Peak learning rate from the supervised transformer baseline; pretraining uses a cosine schedule with 10x decay.
+  learning_rate_schedule: "Cosine decay with 10x decay"
+  batch_size: 512
+  context_window: 8192
+  num_epochs: "Not specified"  # The paper does not specify the number of epochs.
+  warmup_steps: "Not specified"  # Warmup steps are not explicitly provided.
+model:
+  type: "Decoder-only Transformer"
+  base_architecture: "Qwen2-inspired"
+  variants:
+    COMET-S:
+      parameters: "62M"
+      layers: 6
+      hidden_dimension: 768
+      heads: 12
+      mlp_dimension: 3072
+    COMET-M:
+      parameters: "119M"
+      layers: 12
+      hidden_dimension: 768
+      heads: 12
+      mlp_dimension: 3072
+    COMET-L:
+      parameters: "1B"
+      layers: 16
+      hidden_dimension: 2048
+      heads: 32
+      mlp_dimension: 8192
+inference:
+  num_generations: 25  # Default number for Monte Carlo simulation; task-specific values may vary.
+  temperature: 1.0
+  max_tokens: 2000
+evaluation:
+  metrics: ["AUCROC", "PR-AUC", "MAE", "ECE", "RMSLE"]
+  simulation:
+    aggregation: "Monte Carlo aggregation for event probability and time-to-event computation"
+## End of config.yaml

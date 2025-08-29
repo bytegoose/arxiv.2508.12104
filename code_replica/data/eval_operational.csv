@@ -1,0 +1,16 @@
+type,prompt,ground_truth,patient_id
+encounter_forecast,"['ENC_START', 'OUTPATIENT']",8.0,PATIENT_001
+los,"['ENC_START', 'OUTPATIENT']",798.0,PATIENT_001
+readmission,"['ENC_START', 'OUTPATIENT']",1.0,PATIENT_001
+encounter_forecast,"['ENC_START', 'EMERGENCY']",6.0,PATIENT_002
+los,"['ENC_START', 'EMERGENCY']",502.0,PATIENT_002
+readmission,"['ENC_START', 'EMERGENCY']",1.0,PATIENT_002
+encounter_forecast,"['ENC_START', 'INPATIENT']",4.0,PATIENT_003
+los,"['ENC_START', 'INPATIENT']",420.0,PATIENT_003
+readmission,"['ENC_START', 'INPATIENT']",1.0,PATIENT_003
+encounter_forecast,"['ENC_START', 'OUTPATIENT']",4.0,PATIENT_004
+los,"['ENC_START', 'OUTPATIENT']",152.0,PATIENT_004
+readmission,"['ENC_START', 'OUTPATIENT']",1.0,PATIENT_004
+encounter_forecast,"['ENC_START', 'OUTPATIENT']",5.0,PATIENT_005
+los,"['ENC_START', 'OUTPATIENT']",502.0,PATIENT_005
+readmission,"['ENC_START', 'OUTPATIENT']",1.0,PATIENT_005

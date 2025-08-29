@@ -1,0 +1,80 @@
+# Configuration file for CoMET model training with synthetic medical data
+
+# Data configuration
+data:
+  data_filepath: "data/raw_data.csv"
+  raw_data_format: "csv"
+  min_age: 18
+  max_age: 120
+  reference_date: "2012-01-01"
+  encounter_start_date_min: "2012-01-01"
+  encounter_start_date_max: "2025-04-17"
+  valid_encounter_types: ["outpatient", "emergency", "inpatient", "telehealth"]
+  random_seed: 42
+  use_validation: true
+  validation_split_fraction: 0.1
+  test_split_fraction: 0.1
+
+# Model configuration
+model:
+  variant: "COMET-S"  # Options: COMET-S, COMET-M, COMET-L
+  context_window: 8192
+  vocab_size: 7105
+  dropout: 0.1
+  group_size: 1
+
+# Tokenizer configuration
+tokenizer:
+  max_sequence_length: 2048
+  padding_token: "<PAD>"
+  unknown_token: "<UNK>"
+  start_token: "<START>"
+  end_token: "<END>"
+  special_tokens:
+    - "<PAD>"
+    - "<UNK>"
+    - "<START>"
+    - "<END>"
+    - "ENC_START"
+    - "ENC_END"
+    - "OUTPATIENT"
+    - "INPATIENT"
+    - "EMERGENCY"
+    - "TELEHEALTH"
+
+# Training configuration
+training:
+  batch_size: 8
+  learning_rate: 0.0001
+  max_epochs: 10
+  warmup_steps: 1000
+  dropout: 0.1
+  label_smoothing: 0.1
+  train_steps_base: 10000
+  train_steps_big: 30000
+  checkpoint_interval: 1000
+  optimizer:
+    beta1: 0.9
+    beta2: 0.98
+    epsilon: 1e-9
+
+# Inference configuration
+inference:
+  num_generations: 25
+  temperature: 1.0
+  max_tokens: 500
+
+# Evaluation configuration
+evaluation:
+  metrics: ["AUCROC", "PR-AUC", "MAE", "ECE", "RMSLE"]
+  evaluation_data:
+    plausibility: "data/eval_plausibility.csv"
+    single_encounter: "data/eval_single_encounter.csv"
+    disease_specific: "data/eval_disease_specific.csv"
+    operational: "data/eval_operational.csv"
+
+# Logging configuration
+logging:
+  log_level: "INFO"
+  log_file: "training.log"
+  tensorboard_dir: "runs"
